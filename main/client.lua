@@ -1,4 +1,5 @@
 local socket = require "socket"
+local logger = require "packages.logger"
 
 local discord = {}
 
@@ -20,7 +21,7 @@ function discord:login(token)
   self.client:send("Authorization: Bot " .. tostring(self.token))
 
   local response = self.client:receive("*a")
-  print(response .. "payload")
+  logger:success(response .. "payload")
 end
 
 function discord:send_message(channel_id, message)
@@ -33,7 +34,7 @@ function discord:send_message(channel_id, message)
   self.client:send(payload) -- a la wea la auth :)
 
   local response = self.client:receive("*a")
-  print(response)
+  logger:success(response .. "payload")
 end
 
 function discord:logout()
